@@ -1,0 +1,14 @@
+[project]
+name = "directory-mirror-sync"
+version = "0.1.0"
+description = "Mirrors a source directory to a destination, copying changed files and removing files no longer present."
+requires-python = ">=3.10"
+dependencies = []
+readme = "README.md"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
