@@ -23,3 +23,10 @@ The trade-off is simplicity over performance. There is no incremental state file
 A content-identical file whose Unix mode bits differ (for example, the source gained the executable bit) is reported in `updated` and its mode is rewritten on the destination. This is a deliberate choice: a mirror that silently ignores permission changes is not really a mirror. If you only care about contents, filter on `copied` and ignore `updated` entries where you know the content was unchanged.
 
 `SyncResult.errors` collects per-file failures (for example, a source file that cannot be read) as strings rather than raising, so one bad file does not abort the whole pass. Inspect `result.ok` afterwards.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
